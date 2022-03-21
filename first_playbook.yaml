@@ -16,7 +16,7 @@
       name: "{{user_name}}"
       generate_ssh_key: yes
     become: yes
-     tags:
+    tags:
     - user_creation
   - name: install individual package
     package: # OS generic module to install different packages in Linux OS, identify the package manage using "ansible_pkg_mgr" attribute of from gather facts
