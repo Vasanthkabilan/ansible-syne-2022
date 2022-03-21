@@ -9,3 +9,7 @@
       name: ansible-controller
     become: yes
     become_user: root
+  - name: Creating user
+    user:
+      name: vkabilan
+    become: yes
