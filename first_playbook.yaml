@@ -12,4 +12,5 @@
   - name: Creating user
     user:
       name: vkabilan
+      generate_ssh_key: yes
     become: yes
