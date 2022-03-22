@@ -1,0 +1,15 @@
+- name: Installing nodejs and NPM
+  hosts: all
+  become: no
+  tasks:
+  - name: Installing nodejs
+    package:
+      name:
+        - nodejs
+        - npm
+    become: yes
+  - name: running shell commands
+    shell: "node --version && npm --version"
+    register: output
+  - name: print the output of shell commands
+    debug: var=output.stdout_lines 
