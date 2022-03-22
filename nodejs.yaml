@@ -8,6 +8,7 @@
         - nodejs
         - npm
       state: present
+      update_cache: yes
     become: yes
   - name: running shell commands
     shell: "node --version && npm --version"
