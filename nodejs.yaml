@@ -1,5 +1,8 @@
 - name: Installing nodejs and NPM
   hosts: all
+  vars:
+    repo_name: nodejs
+    branch_name: master
   become: no
   tasks:
   - name: Installing nodejs
@@ -27,8 +30,12 @@
       owner: ubuntu
       group: ubuntu
       state: directory
-  - name: cloning a git repo
+  - name: download code
     git:
-      repo: 'https://github.com/kul-samples/nodejs.git'
-      dest: /opt/app
-      update: yes
+      repo: "https://github.com/kul-samples/{{ repo_name }}.git"
+      dest: "/opt/app"
+      version: "{{ branch_name }}"
+      accept_hostkey: yes
+  - name: Install packages based on package.json.
+    npm:
+      path: /opt/app
