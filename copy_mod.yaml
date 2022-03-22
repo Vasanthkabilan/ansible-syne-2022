@@ -1,0 +1,10 @@
+- name: sample copy modules
+  hosts: all
+  vars:
+    files_to_copy: ["hosts","ansible.cfg"]
+  tasks:
+  - name: copy module
+    copy:
+      src: "{{ item }}"
+      dest: "/tmp/{{ item }}"
+    with_items: "{{ files_to_copy }}"
