@@ -30,10 +30,14 @@
     unarchive:
       src: /opt/apache-tomcat-9.0.60.tar.gz
       dest: /opt
+    notify: 
+    - untar_tomcat_tar_file
   - name: updating server.xml
     template: 
       src: server.xml.j2
       dest: "{{ CATALINA_HOME }}/conf/server.xml"
+    notify:
+       - restart_tomcat
   - name: adding tomcat init file
     template:
       src: tomcat-init.sh.j2
@@ -46,5 +50,17 @@
       state: started
       enabled: no
     become: yes
+  handlers: # are like tasks but being on the basis of the change any task defined under tasks
+  - name: untar_tomcat_tar_file
+    unarchive:
+      src: /opt/apache-tomcat-9.0.60.tar.gz
+      dest: /opt
+  - name: restart_tomcat
+    service:
+      name: tomcat
+      state: restarted
+    become: yes
+    
+  
 
 
