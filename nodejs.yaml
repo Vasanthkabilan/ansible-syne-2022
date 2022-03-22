@@ -45,11 +45,6 @@
       global: yes
       state: present
     become: yes
-
-  - name: Start App
-    command: forever start app.js
-    args:
-      chdir: "/opt/app"
   - name: start application
     shell: cd /opt/app && forever start app.js && forever logs app.js
     register: start_application
