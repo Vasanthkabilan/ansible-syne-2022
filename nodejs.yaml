@@ -42,9 +42,9 @@
   - name: install forever
     npm:
       name: forever
-      path: /opt/app
       global: yes
       state: present
+    become: yes
 
   - name: Start App
     command: forever start app.js
