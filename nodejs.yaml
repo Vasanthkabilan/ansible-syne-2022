@@ -52,6 +52,8 @@
       chdir: "/opt/app"
   - name: Logs of APP
     command: forever logs app.js
+    args:
+      chdir: "/opt/app"
     register: output
   - name: print the output of shell commands
     debug: var=output.stdout_lines  
