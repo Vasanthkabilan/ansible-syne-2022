@@ -42,7 +42,7 @@
   - name: install forever
     npm:
       name: forever
-      dest: /opt/app
+      path: /opt/app
       global: yes
       state: present
 
