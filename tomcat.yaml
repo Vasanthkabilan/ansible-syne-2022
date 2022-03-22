@@ -7,11 +7,11 @@
   - name: setting up tomcat 
     get_url:
       url: "{{url_name}}"
-      path: /opt
+      path: /opt/apache-tomcat-9.0.60.tar.gz
     become: yes
   - name: Extracting tar file
     unarchive:
-      src: /opt/tomacat-*.tar.gz
+      src: /opt/apache-tomcat-9.0.60.tar.gz
       dest: /opt
     become: yes
 
