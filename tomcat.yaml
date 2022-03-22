@@ -44,7 +44,7 @@
     service:
       name: tomcat
       state: started
-      enabled: no
+      enabled: yes
     become: yes
 
 
