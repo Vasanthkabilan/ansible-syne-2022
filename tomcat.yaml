@@ -20,6 +20,8 @@
       url: "{{url_name}}"
       dest: /opt/apache-tomcat-9.0.60.tar.gz
     become: yes
+    notify: 
+    - untar_tomcat_tar_file
   - name: change owner for /opt
     file:
       path: /opt
@@ -30,8 +32,6 @@
     unarchive:
       src: /opt/apache-tomcat-9.0.60.tar.gz
       dest: /opt
-    notify: 
-    - untar_tomcat_tar_file
   - name: updating server.xml
     template: 
       src: server.xml.j2
