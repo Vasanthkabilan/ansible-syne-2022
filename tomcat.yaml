@@ -28,10 +28,6 @@
       owner: ubuntu
       group: ubuntu
     become: yes
-  - name: Extracting tar file
-    unarchive:
-      src: /opt/apache-tomcat-9.0.60.tar.gz
-      dest: /opt
   - name: updating server.xml
     template: 
       src: server.xml.j2
