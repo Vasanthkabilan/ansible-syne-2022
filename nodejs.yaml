@@ -39,3 +39,12 @@
   - name: Install packages based on package.json.
     npm:
       path: /opt/app
+  - name: Start App
+    command: forever start app.js
+    args:
+      chdir: "app-folder"
+  - name: Logs of APP
+    command: foreven logs app.js
+    register: output
+  - name: print the output of shell commands
+    debug: var=output.stdout_lines  
