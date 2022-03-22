@@ -50,10 +50,8 @@
     command: forever start app.js
     args:
       chdir: "/opt/app"
-  - name: Logs of APP
-    command: forever logs app.js
-    args:
-      chdir: "/opt/app"
-    register: output
-  - name: print the output of shell commands
-    debug: var=output.stdout_lines  
+  - name: start application
+    shell: cd /opt/app && forever start app.js && forever logs app.js
+    register: start_application
+  - name: print application logs on screen
+    debug: var=start_application.stdout_lines
