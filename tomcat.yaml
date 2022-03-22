@@ -4,6 +4,12 @@
   vars: 
     url_name: "https://dlcdn.apache.org/tomcat/tomcat-9/v9.0.60/bin/apache-tomcat-9.0.60.tar.gz"
   tasks:
+  - name: Install JRE
+    package:
+      name: default-jdk
+      state: present
+      update_cache: yes
+    become: yes
   - name: setting up tomcat 
     get_url:
       url: "{{url_name}}"
