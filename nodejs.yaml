@@ -42,7 +42,7 @@
   - name: Start App
     command: forever start app.js
     args:
-      chdir: "app-folder"
+      chdir: "/opt/app"
   - name: Logs of APP
     command: foreven logs app.js
     register: output
