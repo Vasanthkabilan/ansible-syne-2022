@@ -1,29 +1,22 @@
-- name: Installing nodejs and NPM
+- name: deploying nodejs application
   hosts: all
   vars:
     repo_name: nodejs
     branch_name: master
-  become: no
   tasks:
-  - name: Installing nodejs
+  - name: install runtimes
     package:
       name:
-        - nodejs
-        - npm
+      - nodejs
+      - npm
       state: present
       update_cache: yes
     become: yes
-  - name: running shell commands
-    shell: "node --version && npm --version"
-    register: output
-  - name: print the output of shell commands
-    debug: var=output.stdout_lines 
-  - name: removing app directory
-    file:
-      path: /opt/app
-      owner: ubuntu
-      group: ubuntu
-      state: absent
+  - name: checking version
+    shell: node --version && npm --version
+    register: version
+  - name: print versions
+    debug: var=version.stdout_lines  
   - name: creating app directory
     file:
       path: /opt/app
@@ -36,17 +29,22 @@
       dest: "/opt/app"
       version: "{{ branch_name }}"
       accept_hostkey: yes
-  - name: Install packages based on package.json.
+      update: yes
+  - name: Install nodejs modules
     npm:
       path: /opt/app
-  - name: install forever
+  - name: install forever module
     npm:
       name: forever
       global: yes
       state: present
     become: yes
+  - name: checking current status of application
+    shell: cd /opt/app && forever logs app.js
+    register: current_status
   - name: start application
-    shell: cd /opt/app && forever start app.js && forever logs app.js
+    when: "'Cannot find forever process' in current_status.stdout"
+    shell: cd /opt/app && forever start app.js
     register: start_application
   - name: print application logs on screen
     debug: var=start_application.stdout_lines
