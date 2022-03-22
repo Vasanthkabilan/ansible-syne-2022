@@ -1,0 +1,18 @@
+- name: Tomcat installation
+  hosts: all
+  become: no
+  vars: 
+    url_name: https://dlcdn.apache.org/tomcat/tomcat-9/v9.0.60/bin/apache-tomcat-9.0.60.tar.gz
+  tasks:
+  - name: setting up tomcat 
+    get_url:
+      url: "{{url_name}}"
+      path: /opt
+    become: yes
+  - name: Extracting tar file
+    unarchive:
+      src: /opt/tomacat-*.tar.gz
+      dest: /opt
+    become: yes
+
+
