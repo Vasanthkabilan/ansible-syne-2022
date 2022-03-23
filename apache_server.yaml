@@ -1,6 +1,6 @@
 - name: Installing apache server
   hosts: linux
-  become: no
+  become: yes
   tasks:
   - name: install apache on centos
     package:
