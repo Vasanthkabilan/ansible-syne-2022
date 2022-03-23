@@ -1,0 +1,14 @@
+- name: Installing apache server
+  hosts: linux
+  become: no
+  tasks:
+    - name: install apache on centos
+    package:
+      state: present
+      update_cache: yes
+      name: httpd
+    - name: install apache on ubuntu
+    package:
+      state: present
+      update_cache: yes
+      name: apache2
